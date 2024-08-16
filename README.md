@@ -1,7 +1,7 @@
 # WeatherService
 
 ## Summary
-A .NET Core 8.0 Web API project that demonstates a REST endpoint that serves weather forecasts given a latitude/longitude pair
+A .NET Core 8.0 Web API project that demonstrates a REST endpoint that serves weather forecasts given a latitude/longitude pair
 
 ## Projects
 - WeatherService
@@ -16,7 +16,7 @@ A .NET Core 8.0 Web API project that demonstates a REST endpoint that serves wea
 - In appsettings.json, specify a UserAgent value or leave as is (the defaults work)
 - Open the solution in Visual Studio 2022 and build
 - Ensure that the WeatherService project is set as the startup project
-- Press F5 and a browser intance will launch with a Swagger UI
+- Press F5 and a browser instance will launch with a Swagger UI
 - Use the Swagger UI presented to test the WeatherForecast endpoint
    - Expand the collapsible panel for the endpoint 
    - Press the `Try it out` button
