@@ -27,4 +27,5 @@ A .NET Core 8.0 Web API project that demonstates a REST endpoint that serves wea
       - 200: Weather data was found and is displayed as JSON
 - Alternatives to Swagger UI (after running the project in Visual Studio)
    - Open any browser and enter this url format: ht<span>tps://</span>localhost:&lt;running port&gt;/WeatherForecast/&lt;latitude&gt;,&lt;latitude&gt;. Be sure to replace the port, latitude, and longitude with actual values
+   - Example: `https://localhost:7228/WeatherForecast/42.3943,-122.576`
    - Postman is another good option for testing this endpoint
