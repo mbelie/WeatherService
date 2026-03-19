@@ -5,7 +5,7 @@ on:
       filter:
         description: 'Test filter'
         required: false                
-        default: 'ClassName~HttpClientWrapper'
+        # default: 'ClassName~HttpClientWrapper'
         type: string
       confirm:
         description: 'Run tests?'
