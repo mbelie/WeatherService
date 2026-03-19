@@ -45,8 +45,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Restore local tools
-      run: dotnet tool restore
+    - name: Install tools
+      run: dotnet tool install --local dotnet-coverage      
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
