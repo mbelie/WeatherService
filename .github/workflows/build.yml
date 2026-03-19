@@ -5,7 +5,7 @@ on:
       filter:
         description: 'Test filter'
         required: true                
-        default: 'ClassName~Pet' # '~' indicates contains
+        default: 'Weather'
         type: string
       confirm:
         description: 'Run tests?'
@@ -50,7 +50,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
     
     - name: Execute unit tests
-      run: dotnet test
+      run: dotnet test --filter "FullyQualifiedName~${{ inputs.filter }}"
     
     - name: Generate coverage report
       run: echo "Run coverage report here"
