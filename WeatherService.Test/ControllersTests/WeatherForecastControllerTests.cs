@@ -3,5 +3,6 @@
 [TestClass]
 public class WeatherForecastControllerTests
 {
-    // TODO: Implement
+    // Intentional failure to test GHA workflow
+    Assert.IsTrue(false);
 }
