@@ -54,7 +54,7 @@ jobs:
     
     - name: Execute unit tests with coverage
       # run: dotnet test --filter "FullyQualifiedName~${{ inputs.filter }}"
-      run: dotnet tool run dotnet-coverage collect "dotnet test --filter \"${{ inputs.filter }}\"" -f cobertura -o coverage.xml
+      run: dotnet tool run dotnet-coverage collect "dotnet test --filter '${{ inputs.filter }}'" -f cobertura -o coverage.xml
     
     - name: Generate coverage report
       run: reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
