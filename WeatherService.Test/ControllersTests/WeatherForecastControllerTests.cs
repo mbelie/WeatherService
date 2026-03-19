@@ -3,6 +3,8 @@
 [TestClass]
 public class WeatherForecastControllerTests
 {
-    // Intentional failure to test GHA workflow
-    Assert.IsTrue(false);
+    public void DummyTest()
+    {
+        Assert.AreEqual(1, 1);
+    }
 }
