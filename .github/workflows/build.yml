@@ -49,11 +49,12 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
     
-    - name: Execute unit tests
-      run: dotnet test --filter "FullyQualifiedName~${{ inputs.filter }}"
+    - name: Execute unit tests with coverage
+      # run: dotnet test --filter "FullyQualifiedName~${{ inputs.filter }}"
+      run: dotnet-coverage collect "dotnet test --filter "FullyQualifiedName~${{ inputs.filter }}" -f cobertura -o coverage.xml
     
     - name: Generate coverage report
-      run: echo "Run coverage report here"
+      run: reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
 
     - name: Persist the coverage report
       run: echo "Save coverage report"
