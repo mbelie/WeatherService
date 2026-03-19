@@ -5,7 +5,7 @@ on:
       filter:
         description: 'Test filter'
         required: true                
-        default: 'ClassName~Controller|ClassName~Weather'
+        default: 'ClassName~HttpClientWrapper'
         type: string
       confirm:
         description: 'Run tests?'
