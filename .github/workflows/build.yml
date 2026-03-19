@@ -7,10 +7,10 @@ on:
         required: false                
         # default: 'ClassName~HttpClientWrapper'
         type: string
-      confirm:
-        description: 'Run tests?'
-        type: boolean
-        default: true  
+      #confirm:
+      #  description: 'Run tests?'
+      #  type: boolean
+      #  default: true  
 # on:
 #  push:
 #    branches: [ "main" ]
@@ -32,8 +32,7 @@ jobs:
     steps:
     - name: Echo Inputs
       run: |
-          echo "User supplied: ${{ inputs.filter }} as a filter"
-          echo "Run tests status: ${{ inputs.confirm }}"
+          echo "User supplied: ${{ inputs.filter }} as a filter"         
     
     - name: Checkout
       uses: actions/checkout@v4
