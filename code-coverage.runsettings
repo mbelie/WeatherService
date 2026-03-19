@@ -4,11 +4,22 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
            <CodeCoverage>
-            <ModulePaths>
-              <Exclude>
-                <ModulePath>.*Tests\.dll$</ModulePath>
-              </Exclude>
-            </ModulePaths>
+            <IncludeTestAssembly>False</IncludeTestAssembly>
+            <AssemblyFilters>
+              <Exclude>*.Tests.dll</Exclude>
+              <Exclude>*.UnitTests.dll</Exclude>
+            </AssemblyFilters>
+          </CodeCoverage>
+        </Configuration>
+      </DataCollector>
+      <DataCollector friendlyName="Code Coverage">
+        <Configuration>
+          <CodeCoverage>            
+            <IncludeTestAssembly>False</IncludeTestAssembly>
+            <AssemblyFilters>
+              <Exclude>*.Tests.dll</Exclude>
+              <Exclude>*.UnitTests.dll</Exclude>
+            </AssemblyFilters>
           </CodeCoverage>
         </Configuration>
       </DataCollector>
