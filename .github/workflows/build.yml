@@ -53,11 +53,11 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
     
-    - name: Execute unit tests with filtered coverage
+    - name: Execute specific unit tests with coverage
       if: ${{ inputs.filter != '' }}      
       run: dotnet tool run dotnet-coverage collect "dotnet test --filter '${{ inputs.filter }}' --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
       
-    - name: Execute unit tests without filter
+    - name: Execute all unit tests with coverage
       if: ${{ inputs.filter == '' }}      
       run: dotnet tool run dotnet-coverage collect "dotnet test --settings:code-coverage.runsettings" -f cobertura -o coverage.xml      
     
