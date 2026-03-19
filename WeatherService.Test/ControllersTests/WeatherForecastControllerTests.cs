@@ -1,10 +1,26 @@
-﻿namespace WeatherService.Test.ControllersTests;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
+using WeatherService.Controllers;
+using WeatherService.Interfaces.Services;
+
+namespace WeatherService.Test.ControllersTests;
 
 [TestClass]
 public class WeatherForecastControllerTests
 {
-    public void DummyTest()
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void LoggerIsNullTest()
     {
-        Assert.AreEqual(1, 1);
+        var weatherService = new Mock<IWeatherService>().Object;
+        var target = new WeatherForecastController(null, weatherService);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void WeatherServiceIsNullTest()
+    {
+        var logger = new Mock<ILogger<WeatherForecastController>>().Object;
+        var target = new WeatherForecastController(logger, null);
     }
 }
