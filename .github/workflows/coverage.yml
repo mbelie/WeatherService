@@ -1,0 +1,32 @@
+
+name: Coverage
+on:
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: 'Test filter'
+        required: true                
+        default: 'ClassName~HttpClientWrapper'
+        type: string
+      confirm:
+        description: 'Run tests?'
+        type: boolean
+        default: true  
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Release] # Add Debug if you want to have both workflows run in parallel
+
+    runs-on: windows-latest  # For a list of available runner types, refer to
+                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    env:
+      Solution_Name: WeatherService.sln
+      Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
+      
+    steps:
+    - name: Echo Inputs
+      run: |
+          echo "User supplied: ${{ inputs.filter }} as a filter"
+          echo "Run tests status: ${{ inputs.confirm }}"
