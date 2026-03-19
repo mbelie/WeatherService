@@ -4,7 +4,7 @@ on:
     inputs:
       filter:
         description: 'Test filter'
-        required: true                
+        required: false                
         default: 'ClassName~HttpClientWrapper'
         type: string
       confirm:
