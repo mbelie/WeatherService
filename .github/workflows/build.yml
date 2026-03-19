@@ -46,7 +46,9 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Install tools
-      run: dotnet tool install --local dotnet-coverage      
+      run: |
+        dotnet tool install --local dotnet-coverage
+        dotnet tool install --local dotnet-reportgenerator-globaltool
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
