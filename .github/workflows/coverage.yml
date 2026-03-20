@@ -40,14 +40,20 @@ jobs:
       run: |
         dotnet tool install --local dotnet-coverage
         dotnet tool install --local dotnet-reportgenerator-globaltool
+    
+    - name: Download build
+      uses: actions/download-artifact@v4
+      with:
+        name: build${{ inputs.build }}
+        path: path/to/destination
           
     - name: Execute specific unit tests with coverage
       if: ${{ inputs.filter != '' }}      
-      run: dotnet tool run dotnet-coverage collect "dotnet test --collect:"Code Coverage" --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+      run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --collect:"Code Coverage" --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
       
     - name: Execute all unit tests with coverage
       if: ${{ inputs.filter == '' }}      
-      run: dotnet tool run dotnet-coverage collect "dotnet test --settings:code-coverage.runsettings" -f cobertura -o coverage.xml      
+      run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --settings:code-coverage.runsettings" -f cobertura -o coverage.xml      
     
     - name: Generate coverage report
       run:  dotnet tool run reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
