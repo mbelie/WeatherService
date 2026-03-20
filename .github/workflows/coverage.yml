@@ -30,6 +30,12 @@ jobs:
       run: |
           echo "User supplied: ${{ inputs.filter }} as a filter"
           echo "Run tests status: ${{ inputs.confirm }}"
+
+    - name: Install tools
+      run: |
+        dotnet tool install --local dotnet-coverage
+        dotnet tool install --local dotnet-reportgenerator-globaltool
+          
     - name: Execute specific unit tests with coverage
       if: ${{ inputs.filter != '' }}      
       run: dotnet tool run dotnet-coverage collect "dotnet test --collect:"Code Coverage" --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
