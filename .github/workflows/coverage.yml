@@ -5,13 +5,13 @@ on:
     inputs:
       filter:
         description: 'Test filter'
-        required: true                
+        required: false                
         default: 'ClassName~HttpClientWrapper'
         type: string
-      confirm:
-        description: 'Run tests?'
-        type: boolean
-        default: true  
+      build:
+        description: 'Bulid number'
+        required: true
+        type: string  
 
 jobs:
   build:
