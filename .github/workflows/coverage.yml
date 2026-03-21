@@ -7,8 +7,8 @@ on:
         description: 'Test filter' # Use tilda for contains
         required: false                
         type: string
-      build:
-        description: 'Bulid number'
+      run-id:
+        description: 'Run id'
         required: true
         type: string  
 
@@ -42,7 +42,8 @@ jobs:
     - name: Download build
       uses: actions/download-artifact@v4
       with:
-        name: build${{ inputs.build }}
+        name: ${{ inputs.run-id }}
+        run-id: ${{ inputs.run-id }}
         path: .
           
     - name: Execute specific unit tests with coverage
