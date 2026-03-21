@@ -11,6 +11,10 @@ on:
         description: 'Run id'
         required: true
         type: string  
+      run-number:
+        description: 'Run #'
+        required: true
+        type: string  
 
 jobs:
   build:
@@ -42,7 +46,7 @@ jobs:
     - name: Download build
       uses: actions/download-artifact@v4
       with:
-        name: ${{ inputs.run-id }}
+        name: ${{ inputs.run-number }}
         run-id: ${{ inputs.run-id }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path: .
