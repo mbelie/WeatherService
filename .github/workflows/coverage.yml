@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       filter:
-        description: 'Test filter'
+        description: 'Test filter' # Use tilda for contains
         required: false                
-        default: 'ClassName~HttpClientWrapper'
         type: string
       build:
         description: 'Bulid number'
@@ -29,7 +28,6 @@ jobs:
     - name: Echo Inputs
       run: |
           echo "User supplied: ${{ inputs.filter }} as a filter"
-          echo "Run tests status: ${{ inputs.confirm }}"
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
@@ -45,7 +43,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: build${{ inputs.build }}
-        path: path/to/destination
+        path: .
           
     - name: Execute specific unit tests with coverage
       if: ${{ inputs.filter != '' }}      
