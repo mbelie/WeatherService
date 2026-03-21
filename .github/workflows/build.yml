@@ -39,7 +39,7 @@ jobs:
     - name: Upload build
       uses: actions/upload-artifact@v4
       with:
-        name: build${{ github.run_number }}
+        name: ${{ github.run_id }}
         path: |
             **/bin/Release/
             **/obj/
