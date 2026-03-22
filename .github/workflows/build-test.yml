@@ -1,7 +1,11 @@
 name: Build & Test
 on:
-  push:
-    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: "Test filter" # Use tilda for contains
+        required: false
+        type: string
 
 jobs:
   build:
