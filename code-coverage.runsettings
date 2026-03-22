@@ -1,25 +1,14 @@
 <RunSettings>
   <DataCollectionRunSettings>
     <DataCollectors>
-      <DataCollector friendlyName="XPlat code coverage">
-        <Configuration>
-           <CodeCoverage>
-            <IncludeTestAssembly>False</IncludeTestAssembly>
-            <AssemblyFilters>
-              <Exclude>*.Tests.dll</Exclude>
-              <Exclude>*.UnitTests.dll</Exclude>
-            </AssemblyFilters>
-          </CodeCoverage>
-        </Configuration>
-      </DataCollector>
       <DataCollector friendlyName="Code Coverage">
         <Configuration>
-          <CodeCoverage>            
-            <IncludeTestAssembly>False</IncludeTestAssembly>
-            <AssemblyFilters>
-              <Exclude>*.Tests.dll</Exclude>
-              <Exclude>*.UnitTests.dll</Exclude>
-            </AssemblyFilters>
+          <CodeCoverage>
+              <ModulePaths>
+              <Exclude>
+                <ModulePath>.*Test.dll</ModulePath>
+              </Exclude>
+            </ModulePaths>
           </CodeCoverage>
         </Configuration>
       </DataCollector>

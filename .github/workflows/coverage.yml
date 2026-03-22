@@ -1,20 +1,19 @@
-
 name: Coverage
 on:
   workflow_dispatch:
     inputs:
       filter:
-        description: 'Test filter' # Use tilda for contains
-        required: false                
+        description: "Test filter" # Use tilda for contains
+        required: false
         type: string
       run-id:
-        description: 'Run id'
+        description: "Run id"
         required: true
-        type: string  
+        type: string
       run-number:
-        description: 'Run #'
+        description: "Run #"
         required: true
-        type: string  
+        type: string
 
 jobs:
   build:
@@ -22,53 +21,54 @@ jobs:
       matrix:
         configuration: [Release] # Add Debug if you want to have both workflows run in parallel
 
-    runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on:
+      windows-latest # For a list of available runner types, refer to
+      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     env:
       Solution_Name: WeatherService.sln
       Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
-      
+
     steps:
-    - name: Echo Inputs
-      run: |
+      - name: Echo Inputs
+        run: |
           echo "User supplied: ${{ inputs.filter }} as a filter"
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    - name: Install tools
-      run: |
-        dotnet tool install --local dotnet-coverage
-        dotnet tool install --local dotnet-reportgenerator-globaltool
-    
-    - name: Download build
-      uses: actions/download-artifact@v4
-      with:
-        name: ${{ inputs.run-number }}
-        run-id: ${{ inputs.run-id }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path: .
+      - name: Install tools
+        run: |
+          dotnet tool install --local dotnet-coverage
+          dotnet tool install --local dotnet-reportgenerator-globaltool
 
-    - name: List files
-      run: dir /s /b
-      shell: cmd
-          
-    - name: Execute specific unit tests with coverage
-      if: ${{ inputs.filter != '' }}      
-      run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --collect:"Code Coverage" --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
-      
-    - name: Execute all unit tests with coverage
-      if: ${{ inputs.filter == '' }}      
-      run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --collect:"Code Coverage" --settings:code-coverage.runsettings" -f cobertura -o coverage.xml      
-    
-    - name: Generate coverage report
-      run:  dotnet tool run reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.run-number }}
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: .
 
-    - name: Persist the coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: CoverageReport
-        path: CoverageReport
-   
+      - name: List files
+        run: dir /s /b
+        shell: cmd
+
+      - name: Execute specific unit tests with coverage
+        if: ${{ inputs.filter != '' }}
+        # filter example: "(Name~Test) | (Name~Test2)"
+        run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+
+      - name: Execute all unit tests with coverage
+        if: ${{ inputs.filter == '' }}
+        run: dotnet tool run dotnet-coverage collect "dotnet test --no-build --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+
+      - name: Generate coverage report
+        run: dotnet tool run reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
+
+      - name: Persist the coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoverageReport
+          path: CoverageReport
