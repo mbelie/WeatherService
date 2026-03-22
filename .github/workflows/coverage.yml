@@ -59,8 +59,9 @@ jobs:
         run: dir /s /b
         shell: cmd
 
-      - name: Restore NuGet packages
-        run: nuget restore ${{ env.Solution_Name }}
+      # Not needed?
+      #- name: Restore NuGet packages
+      #  run: nuget restore ${{ env.Solution_Name }}
 
       - name: Execute specific unit tests with coverage
         if: ${{ inputs.filter != '' }}
