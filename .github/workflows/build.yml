@@ -17,7 +17,9 @@ jobs:
 
     steps:
       - name: Echo environment variables
+        shell: cmd
         run: |
+          @echo off
           echo "Run-id: ${{ github.run_id }}, Run-number: ${{ github.run_number }}"
 
       - name: Checkout
@@ -43,7 +45,7 @@ jobs:
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.run-id }}
+          name: ${{ github.run_id }}
           path: |
             **/bin/Release/
             **/obj/
