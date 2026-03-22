@@ -51,6 +51,10 @@ jobs:
       - name: Build
         run: msbuild  ${{ env.Solution_Name }} /p:Configuration=Release
 
+      - name: List files
+        run: dir /s /b
+        shell: cmd
+
       - name: Execute all unit tests with coverage
         run: dotnet tool run dotnet-coverage collect "dotnet test --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
 
