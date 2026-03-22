@@ -58,6 +58,8 @@ jobs:
       - name: Execute all unit tests with coverage
         # Shows coverlet & no other tests
         #run: dotnet tool run dotnet-coverage collect "dotnet test -c Release --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+
+        # Works correctly
         run: dotnet tool run dotnet-coverage collect "dotnet test -c Release" -f cobertura -o coverage.xml
 
       - name: Generate coverage report

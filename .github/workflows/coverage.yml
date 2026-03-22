@@ -66,12 +66,12 @@ jobs:
         if: ${{ inputs.filter != '' }}
         # filter example: "(Name~Test) | (Name~Test2)"
         #run: dotnet tool run dotnet-coverage collect "dotnet test ${{ env.Test_Project_Path }} -c Release --no-build --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
-        run: dotnet tool run dotnet-coverage collect "dotnet test c Release --no-build --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+        run: dotnet tool run dotnet-coverage collect "dotnet test c Release --no-build --filter ${{ inputs.filter }} -f cobertura -o coverage.xml
 
       - name: Execute all unit tests with coverage
         if: ${{ inputs.filter == '' }}
         #run: dotnet tool run dotnet-coverage collect "dotnet test ${{ env.Test_Project_Path }} -c Release --no-build --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
-        run: dotnet tool run dotnet-coverage collect "dotnet test -c Release --no-build --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
+        run: dotnet tool run dotnet-coverage collect "dotnet test -c Release --no-build -f cobertura -o coverage.xml
 
       - name: Generate coverage report
         run: dotnet tool run reportgenerator -reports:coverage.xml -targetdir:CoverageReport -reporttypes:HtmlInline
