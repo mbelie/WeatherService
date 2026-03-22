@@ -54,6 +54,9 @@ jobs:
         run: dir /s /b
         shell: cmd
 
+      - name: Restore NuGet packages
+        run: nuget restore ${{ env.Solution_Name }}
+
       - name: Execute specific unit tests with coverage
         if: ${{ inputs.filter != '' }}
         # filter example: "(Name~Test) | (Name~Test2)"
