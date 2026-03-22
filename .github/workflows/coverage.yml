@@ -59,14 +59,10 @@ jobs:
         run: dir /s /b
         shell: cmd
 
-      # Not needed?
-      #- name: Restore NuGet packages
-      #  run: nuget restore ${{ env.Solution_Name }}
-
       - name: Execute specific unit tests with coverage
         if: ${{ inputs.filter != '' }}
         # filter example: "(Name~Test) | (Name~Test2)"
-        # --settings don't seem to work
+        # --settings don't seem to work in GitHub. Different collector?
         #run: dotnet tool run dotnet-coverage collect "dotnet test ${{ env.Test_Project_Path }} -c Release --no-build --filter ${{ inputs.filter }} --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
         run: dotnet tool run dotnet-coverage collect "dotnet test -c Release --no-build --filter ${{ inputs.filter }}" -f cobertura -o coverage.xml
 
