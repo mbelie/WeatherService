@@ -26,8 +26,11 @@ jobs:
 
     steps:
       - name: Echo Inputs
+        shell: cmd
         run: |
-          echo "User supplied: ${{ inputs.filter }} as a filter"
+          @echo off
+          echo "Filter: ${{ inputs.filter }}"
+          echo "Run-id: ${{ inputs.run-id }}"
 
       - name: Install .NET Core
         uses: actions/setup-dotnet@v4
