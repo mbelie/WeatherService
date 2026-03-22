@@ -32,6 +32,11 @@ jobs:
           echo "Filter: ${{ inputs.filter }}"
           echo "Run-id: ${{ inputs.run-id }}"
 
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Install .NET Core
         uses: actions/setup-dotnet@v4
         with:
