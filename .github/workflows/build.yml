@@ -1,7 +1,7 @@
 name: Build
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -9,38 +9,42 @@ jobs:
       matrix:
         configuration: [Release] # Add Debug if you want to have both workflows run in parallel
 
-    runs-on: windows-latest  
-                             
+    runs-on: windows-latest
+
     env:
       Solution_Name: WeatherService.sln
-      Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj     
-      
+      Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Echo environment variables
+        run: |
+          echo "Run-id: ${{ github.run_id }}, Run-number: ${{ github.run_number }}"
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Restore NuGet packages
-      run: nuget restore ${{ env.Solution_Name }}
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    - name: Build
-      run: msbuild  ${{ env.Solution_Name }} /p:Configuration=Release      
-    
-    - name: Upload build
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ github.run_number }}
-        path: |
+      # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore ${{ env.Solution_Name }}
+
+      - name: Build
+        run: msbuild  ${{ env.Solution_Name }} /p:Configuration=Release
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.run-id }}
+          path: |
             **/bin/Release/
             **/obj/
-        retention-days: 1
+          retention-days: 1
