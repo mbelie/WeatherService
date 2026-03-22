@@ -58,6 +58,10 @@ jobs:
         run: cd WeatherService.Test
         shell: cmd
 
+      - name: Check dir
+        run: echo %CD%
+        shell: cmd
+
       - name: Execute specific unit tests with coverage
         if: ${{ inputs.filter != '' }}
         # filter example: "(Name~Test) | (Name~Test2)"
