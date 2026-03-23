@@ -47,7 +47,8 @@ jobs:
 
       - name: Restore NuGet packages
         run: nuget restore ${{ env.Solution_Name }}
-
+      
+      # TODO: Build steps should be in their own job. Same with test steps. This workflow should just reference the other two.
       - name: Build
         run: msbuild  ${{ env.Solution_Name }} /p:Configuration=Release
 
