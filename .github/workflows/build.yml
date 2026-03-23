@@ -13,8 +13,6 @@ jobs:
 
     env:
       Solution_Name: WeatherService.sln
-      Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
-
     steps:
       - name: Echo environment variables
         shell: cmd

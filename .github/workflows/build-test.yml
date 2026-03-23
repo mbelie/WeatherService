@@ -8,66 +8,11 @@ on:
         type: string
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        configuration: [Release] # Add Debug if you want to have both workflows run in parallel
+  call-build:
+    uses: ./.github/workflows/build.yml
 
-    runs-on: windows-latest
-
-    env:
-      Solution_Name: WeatherService.sln
-      Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
-
-    steps:
-      - name: Echo environment variables
-        shell: cmd
-        run: |
-          @echo off
-          echo "Run-id: ${{ github.run_id }}, Run-number: ${{ github.run_number }}"
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Install tools
-        run: |
-          dotnet tool install --local dotnet-coverage
-          dotnet tool install --local dotnet-reportgenerator-globaltool
-
-      # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Restore NuGet packages
-        run: nuget restore ${{ env.Solution_Name }}
-      
-      # TODO: Build steps should be in their own job. Same with test steps. This workflow should just reference the other two.
-      - name: Build
-        run: msbuild  ${{ env.Solution_Name }} /p:Configuration=Release
-
-      - name: List files
-        run: dir /s /b
-        shell: cmd
-
-      - name: Execute all unit tests with coverage
-        # Shows coverlet & no other tests
-        #run: dotnet tool run dotnet-coverage collect "dotnet test -c Release --settings:code-coverage.runsettings" -f cobertura -o coverage.xml
-
-        # Works correctly
-        run: dotnet tool run dotnet-coverage collect "dotnet test -c Release" -f cobertura -o coverage.xml
-
-      - name: Generate coverage report
-        run: dotnet tool run reportgenerator -reports:coverage.xml -c Release -targetdir:CoverageReport -reporttypes:HtmlInline
-
-      - name: Persist the coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: CoverageReport
-          path: CoverageReport
+  call-test:
+    needs: call-build
+    uses: ./.github/workflows/test.yml
+    with:
+      filter: ${{ inputs.filter }}
