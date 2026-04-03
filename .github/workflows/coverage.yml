@@ -1,3 +1,4 @@
+# Runs coverage only against an existing build
 name: Coverage
 on:
   workflow_dispatch:
