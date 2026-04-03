@@ -1,6 +1,11 @@
 name: Test Only
 on:
   workflow_call:
+    inputs:
+      filter:
+        description: "Test filter" # Use tilda for contains
+        required: false
+        type: string
   workflow_dispatch:
     inputs:
       filter:
