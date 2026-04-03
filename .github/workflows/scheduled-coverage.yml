@@ -1,1 +1,18 @@
 
+# Demo a scheduled workflow
+name: Scheduled Coverage
+on:
+ schedule:
+ # Run every day at 19:45 (UTC-6: 13:45 CT)
+   - cron: '40 19 * * *'
+     timezone: 'US/Central'
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/build.yml
+
+  call-test:
+    needs: call-build
+    uses: ./.github/workflows/test.yml
+    with:
+      filter:
