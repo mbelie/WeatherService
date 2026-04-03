@@ -4,7 +4,7 @@ name: Scheduled Coverage
 on:
  schedule:
  # Run every day at 19:45 (UTC-6: 13:45 CT)
-   - cron: '40 19 * * *'
+   - cron: '45 19 * * *'
      timezone: 'US/Central'
 
 jobs:
@@ -15,4 +15,4 @@ jobs:
     needs: call-build
     uses: ./.github/workflows/test.yml
     with:
-      filter:
+      filter: ""
