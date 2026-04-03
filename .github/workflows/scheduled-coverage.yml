@@ -1,10 +1,8 @@
-
 # Demo a scheduled workflow
 name: Scheduled Coverage
 on:
- schedule:
- # Run every day at 18:55 (UTC-5: 13:55 CT/DST)
-   - cron: '50 18 * * *'
+ schedule: 
+   - cron: '16 19 * * *' # Run every day at 19:16 (UTC-5: 2:16 CT/DST)
      timezone: 'US/Central'
 
 jobs:
