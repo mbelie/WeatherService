@@ -1,4 +1,4 @@
-name: Build & Test
+name: Test Only
 on:
   workflow_dispatch:
     inputs:
