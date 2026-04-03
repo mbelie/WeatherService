@@ -3,8 +3,8 @@
 name: Scheduled Coverage
 on:
  schedule:
- # Run every day at 19:45 (UTC-6: 13:45 CT)
-   - cron: '45 19 * * *'
+ # Run every day at 18:55 (UTC-5: 13:55 CT/DST)
+   - cron: '50 18 * * *'
      timezone: 'US/Central'
 
 jobs:
