@@ -2,8 +2,7 @@
 name: Scheduled Coverage
 on:
  schedule: 
-   - cron: '16 19 * * *' # Run every day at 19:16 (UTC-5: 2:16 CT/DST)
-     timezone: 'US/Central'
+   - cron: '30 19 * * *' # Run every day at 19:30 (UTC-5: 2:30 CT/DST)
 
 jobs:
   call-build:
