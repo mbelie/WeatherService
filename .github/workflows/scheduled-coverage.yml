@@ -3,7 +3,7 @@ name: Scheduled Coverage
 on:
  workflow_dispatch: # Hack to kickstart the scheduled trigger
  schedule: 
-   - cron: '10 20 * * *' # (20:10 - 5 = 15:10) 
+   - cron: '20 20 * * *' # (20:20 - 5 = 15:20) 
 jobs:
   call-build:
     uses: ./.github/workflows/build.yml
@@ -11,5 +11,3 @@ jobs:
   call-test:
     needs: call-build
     uses: ./.github/workflows/test.yml
-    with:
-      filter: ""
