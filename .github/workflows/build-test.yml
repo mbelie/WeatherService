@@ -4,6 +4,7 @@ on:
     inputs:
       filter:
         description: "Test filter" # Use tilda for contains
+        default: ""
         required: false
         type: string
 
