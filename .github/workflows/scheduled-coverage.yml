@@ -2,8 +2,7 @@
 name: Scheduled Coverage
 on:
  schedule: 
-   - cron: '40 20 * * *' 
-
+   - cron: '45 19 * * *' # (19:45 - 5 = 14:15) 
 jobs:
   call-build:
     uses: ./.github/workflows/build.yml
