@@ -1,6 +1,7 @@
 # Demo a scheduled workflow
 name: Scheduled Coverage
 on:
+ workflow_dispatch: # Hack to kickstart the scheduled trigger
  schedule: 
    - cron: '45 19 * * *' # (19:45 - 5 = 14:45) 
 jobs:
