@@ -9,6 +9,7 @@ on:
 
 jobs:
   call-build:
+    runs-on: windows-latest
     env:
       Solution_Name: WeatherService.sln
       Test_Project_Path: WeatherService.Test/WeatherService.Test.csproj
