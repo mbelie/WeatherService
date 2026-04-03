@@ -3,7 +3,8 @@ name: Scheduled Coverage
 on:
  workflow_dispatch: # Hack to kickstart the scheduled trigger
  schedule: 
-   - cron: '30 20 * * *' # 20:30 UTC, 15:30 CDT
+   #- cron: '30 20 * * *' # 20:30 UTC, 15:30 CDT (not working)
+   - cron: '*/5 * * * *' 
 jobs:
   call-build:
     uses: ./.github/workflows/build.yml
