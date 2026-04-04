@@ -2,8 +2,9 @@
 name: Scheduled Coverage
 on:
  workflow_dispatch: # Hack to kickstart the scheduled trigger
- schedule: 
-   - cron: '0 22 * * *' # 22:00 UTC is 17:00 CDT
+ # Commented out as this was jsut for tetsing purposes
+ #schedule: 
+   #- cron: '0 22 * * *' # 22:00 UTC is 17:00 CDT
    #- cron: '0 * * * *' # TODO: Disable. Test only
 jobs:
   call-build:
